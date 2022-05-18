@@ -8,15 +8,15 @@ namespace Repository.Models
         int PinCode { get; }
         string Name { get; }
         string Surname { get; }
-        List<Table> TableList { get; }
+        //List<Table> TableList { get; }
 
-        public Waitress(int id, int pinCode, string name, string surname, List<Table> tableList )
+        public Waitress(int id, int pinCode, string name, string surname )
         {
             Id = id;
             PinCode = pinCode;
             Name = name;
             Surname = surname;
-            TableList = tableList;
+            //TableList = tableList;
         }
     }
 }

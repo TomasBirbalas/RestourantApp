@@ -24,7 +24,7 @@ namespace Repository.Models
             Status = status;
 
             NumberOfSeats = random.Next(2,9);
-            Order = new List<Order>();
+            //Order = new List<Order>();
         }
     }
 }
