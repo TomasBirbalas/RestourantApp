@@ -41,6 +41,7 @@
             this.btnGetNewTable.TabIndex = 0;
             this.btnGetNewTable.Text = "Book Table";
             this.btnGetNewTable.UseVisualStyleBackColor = true;
+            this.btnGetNewTable.Click += new System.EventHandler(this.btnGetNewTable_Click);
             // 
             // lbPersonCount
             // 

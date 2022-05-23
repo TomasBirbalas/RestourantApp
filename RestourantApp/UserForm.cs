@@ -17,6 +17,8 @@ namespace RestourantApp
     {
         private WaitressRepo waitressRepo = new WaitressRepo();
         private Waitress _Waitress;
+
+        WaitressServices _WaitressServices = new WaitressServices();
         public UserForm()
         {
             InitializeComponent();
@@ -49,6 +51,19 @@ namespace RestourantApp
                 }
 
                 this.Controls.Add(btnTableNumber[i]);
+            }
+        }
+
+        private void btnGetNewTable_Click(object sender, EventArgs e)
+        {
+            int personCounter;
+            _Waitress = waitressRepo.RetrieveWaitress(Global.id, Global.pinCode);
+
+            if (int.TryParse(inputPersonCount.Text, out personCounter))
+            {
+                Table table = _WaitressServices.GetNewTable(_Waitress, personCounter);
+
+                MessageBox.Show($"Available table is {table.Id}");
             }
         }
     }
