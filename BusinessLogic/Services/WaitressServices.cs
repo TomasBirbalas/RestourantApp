@@ -18,8 +18,7 @@ namespace BusinessLogic.Services
         {
             List<Table> tableList = waitress.TableList;
 
-            tableList = tableList.FindAll(table => table.Status == false).ToList();
-            return tableList.OrderBy(x => Math.Abs(x.NumberOfSeats - personCount)).First();
+            return tableList.FindAll(table => table.Status == false).Aggregate((current, next) => Math.Abs((int)current.NumberOfSeats - personCount) < Math.Abs((int)next.NumberOfSeats - personCount) ? current : next);
         }
     }
 
