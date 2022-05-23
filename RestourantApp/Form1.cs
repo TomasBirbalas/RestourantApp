@@ -1,4 +1,5 @@
-﻿using Repository.DataAccess;
+﻿using BusinessLogic.Services;
+using Repository.DataAccess;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace RestourantApp
 {
     public partial class Form1 : Form
     {
+        Waitress _Waitress;
         public Form1()
         {
             InitializeComponent();
@@ -44,9 +46,18 @@ namespace RestourantApp
             int pinCode;
             if (int.TryParse(inputUserId.Text, out id) && int.TryParse(inputUserPinCode.Text, out pinCode))
             {
-                Waitress waitress = waitressRepo.RetrieveWaitress(id, pinCode);
+                _Waitress = waitressRepo.RetrieveWaitress(id, pinCode);
 
-                MessageBox.Show($"You have successfully logged in.\r\n{waitress.Name} {waitress.Surname}");
+                MessageBox.Show($"You have successfully logged in.\r\n{_Waitress.Name} {_Waitress.Surname}");
+
+                textBoxFullName.Text = $"{_Waitress.Name} {_Waitress.Surname}";
+
+                Global.id = id;
+                Global.pinCode = pinCode;
+
+                UserForm userForm = new UserForm();
+
+                openChildForm(userForm);
             }
         }
 
