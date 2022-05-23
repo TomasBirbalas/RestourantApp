@@ -15,7 +15,7 @@ namespace Repository.DataAccess
 
         public List<Product> RetrevieData()
         {
-            var dataFile = File.ReadAllLines(@"D:\Programavimo kursai\NET\Advanced\RestourantApp\DataFiles\food-menu.csv")
+            var dataFile = File.ReadAllLines(@"..\..\..\..\DataFiles\food-menu.csv")
                 .Skip(1)
                 .Select(x => x.Split(','))
                 .Select(x => new Food(
