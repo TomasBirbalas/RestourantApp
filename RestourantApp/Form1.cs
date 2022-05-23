@@ -30,10 +30,41 @@ namespace RestourantApp
             List<Product> productsList = new List<Product>();
             productsList = productRepo.RetrevieData();
 
-            productsList.ForEach(product =>
+            WaitressRepo waitressRepo = new WaitressRepo();
+            Waitress waitress = waitressRepo.RetrieveWaitress(1, 1234);
+
+            inputUserId.Text += $"{waitress.Name} {waitress.Surname}";
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            WaitressRepo waitressRepo = new WaitressRepo();
+
+            int id;
+            int pinCode;
+            if (int.TryParse(inputUserId.Text, out id) && int.TryParse(inputUserPinCode.Text, out pinCode))
             {
-                textBox1.Text += $"{product.ToString()}\r\n";
-            });
+                Waitress waitress = waitressRepo.RetrieveWaitress(id, pinCode);
+
+                MessageBox.Show($"You have successfully logged in.\r\n{waitress.Name} {waitress.Surname}");
+            }
+        }
+
+        private Form activeForm = null;
+        private void openChildForm(Form childForm)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(childForm);
+            panelMain.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
     }
 }
