@@ -11,20 +11,16 @@ namespace Repository.Models
     {
         public int Id { get; }
         public int NumberOfSeats { get; }
-        public TableStatus Status { get; }
-        public Order Order { get; }
-        public DateTime Created { get; }
-        public DateTime Closed { get; }
+        public bool Status { get; }
 
-        public Table(int id, TableStatus status)
+        public Table(int id, int numberOfSeats, bool status)
         {
             Random random = new Random();
 
             Id = id;
+            NumberOfSeats = numberOfSeats;
             Status = status;
 
-            NumberOfSeats = random.Next(2,9);
-            //Order = new List<Order>();
         }
     }
 }

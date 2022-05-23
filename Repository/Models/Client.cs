@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Models.OrderModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ namespace Repository.Models
     {
         public int PersonCount { get; }
         public int TableID { get; set; }
+        public Order Order { get; }
 
-        public Client(int personCount, int tableId)
+        public Client(int personCount, int tableId, Order order)
         {
             PersonCount = personCount;
             TableID = tableId;
+            Order = order;
         }
     }
 }
