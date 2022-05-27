@@ -20,6 +20,10 @@ namespace BusinessLogic.Services
 
             return tableList.FindAll(table => table.Status == false).Aggregate((current, next) => Math.Abs((int)current.NumberOfSeats - personCount) < Math.Abs((int)next.NumberOfSeats - personCount) ? current : next);
         }
+        public void BookTable(ref Table table)
+        {
+            table.Status = true;
+        }
     }
 
 }
