@@ -13,11 +13,11 @@ namespace Repository.Models
         public int TableID { get; set; }
         public Order Order { get; }
 
-        public Client(int personCount, int tableId, Order order)
+        public Client(int personCount, int tableId)
         {
             PersonCount = personCount;
             TableID = tableId;
-            Order = order;
+            Order = new Order();
         }
     }
 }

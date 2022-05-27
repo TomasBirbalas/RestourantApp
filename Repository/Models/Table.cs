@@ -11,16 +11,13 @@ namespace Repository.Models
     {
         public int Id { get; }
         public int NumberOfSeats { get; }
-        public bool Status { get; }
+        public bool Status { get; set; }
 
         public Table(int id, int numberOfSeats, bool status)
         {
-            Random random = new Random();
-
             Id = id;
             NumberOfSeats = numberOfSeats;
             Status = status;
-
         }
     }
 }
