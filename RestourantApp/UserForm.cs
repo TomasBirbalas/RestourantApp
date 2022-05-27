@@ -1,6 +1,8 @@
 ﻿using BusinessLogic.Services;
 using Repository.DataAccess;
+using Repository.Deserializer;
 using Repository.Models;
+using Repository.Serializer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,9 @@ namespace RestourantApp
     {
         private WaitressRepo waitressRepo = new WaitressRepo();
         private Waitress _Waitress;
+
+        private DataSerializer dataSerializer = new DataSerializer();
+        private JSONdeserializer jsonDeserializer = new JSONdeserializer();
 
         WaitressServices _WaitressServices = new WaitressServices();
         public UserForm()
@@ -35,7 +40,7 @@ namespace RestourantApp
             for (int i = 0; i < n; i++)
             {
                 btnTableNumber[i] = new Button();
-                btnTableNumber[i].Text = $"Table {i + 1}";
+                btnTableNumber[i].Text = $"Table {_Waitress.TableList[i].Id}";
                 btnTableNumber[i].Width = 145;
                 btnTableNumber[i].Height = 145;
 
@@ -64,6 +69,20 @@ namespace RestourantApp
                 Table table = _WaitressServices.GetNewTable(_Waitress, personCounter);
 
                 MessageBox.Show($"Available table is {table.Id}");
+
+
+                DialogResult res = MessageBox.Show($"Do you want to Book Table {table.Id}", "Book new Table", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (res == DialogResult.OK)
+                {
+                    _WaitressServices.BookTable(ref table);
+                    List<Client> clientList = jsonDeserializer.DeserializeClient(@"..\..\..\..\DataFiles\clientJSON.json");
+                    clientList.Add(new Client(personCounter, table.Id));
+                    dataSerializer.SerializeData(@"..\..\..\..\DataFiles\clientJSON.json", clientList);
+                }
+                if (res == DialogResult.Cancel)
+                {
+                    MessageBox.Show("You have clicked Cancel Button");
+                }
             }
         }
     }
